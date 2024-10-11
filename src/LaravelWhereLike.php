@@ -11,6 +11,10 @@ class LaravelWhereLike
     public function __construct() {
     }
 
+    public static function tambah($a, $b) {
+        return $a + $b;
+    }
+
     public static function register()
     {
         /**
