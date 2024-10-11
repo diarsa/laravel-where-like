@@ -18,8 +18,8 @@ class LaravelWhereLike
     public static function register()
     {
         /**
-         * Custom macro whereLike => Searching models using a where like query in Laravel
-         * @source https://freek.dev/1182-searching-models-using-a-where-like-query-in-laravel
+         * Custom macro whereLike => Searching models using a where like query in Laravel, event for encrypted fields
+         *
          */
         Builder::macro('whereLike', function ($attributes, string $searchTerm) {
             $this->where(function (Builder $query) use ($attributes, $searchTerm) {
