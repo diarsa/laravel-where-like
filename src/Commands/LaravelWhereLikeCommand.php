@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Diarsa\LaravelWhereLike\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelWhereLikeCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-where-like';
 
     public $description = 'My command';
 
