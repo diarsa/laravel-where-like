@@ -1,22 +1,25 @@
 {
     "name": "diarsa/laravel-where-like",
-    "description": "A Laravel package that provides an easy way to use query builder",
+    "description": "A Laravel package that provides an easy way to search using Laravel's query builder across multiple fields, including related models in a simple and efficient way.",
     "keywords": [
         "diarsa",
         "laravel",
-        "laravel-where-like"
+        "laravel-where-like",
+        "search",
+        "eloquent",
+        "query-builder"
     ],
     "homepage": "https://github.com/diarsa/laravel-where-like",
     "license": "MIT",
     "authors": [
         {
             "name": "Bayu Diarsa",
-            "email": "idiarsa@gmail.com",
+            "email": "diarsadev@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.0",
         "spatie/laravel-package-tools": "^1.16",
         "illuminate/contracts": "^10.0||^11.0"
     },

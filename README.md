@@ -20,10 +20,10 @@ composer require diarsa/laravel-where-like
 In query builder, you can perform searches across multiple fields, including related models, using this method.
 
 ```php
-use Diarsa\LaravelWhereLike\LaravelWhereLike;
-
 $search = $request->search;
-return User::where('status', 1)->whereLike(['name', 'address', 'categoryDetail.category_code', 'histories.device'], $search)->get();
+return User::where('status', 1)
+    ->whereLike(['name', 'address', 'categoryDetail.category_code', 'histories.device'], $search)
+    ->get();
 
 ```
 
