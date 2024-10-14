@@ -53,11 +53,7 @@
             "Composer\\Config::disableProcessTimeout",
             "@composer run build",
             "@php vendor/bin/testbench serve"
-        ],
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
+        ]
     },
     "config": {
         "sort-packages": true,
