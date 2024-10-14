@@ -20,9 +20,9 @@ class LaravelWhereLike
     {
         /**
          * Custom macro whereLike => Searching models using a where like query in Laravel, event for encrypted fields
-        //  * @param array|string $attributes
-        //  * @param string $searchTerm
-        //  * @return Builder
+         * @param array|string $attributes
+         * @param string $searchTerm
+         * @return Builder
          */
         Builder::macro('whereLike', function ($attributes, string $searchTerm) {
             $this->where(function (Builder $query) use ($attributes, $searchTerm) {
@@ -63,9 +63,9 @@ class LaravelWhereLike
         /**
          * Custom macro maskSensitiveData => Mask sensitive data with asterisk (*) in Laravel Collection
          * @param string $data
-        //  * @param int $unmaskedStart opsional
-        //  * @param int $unmaskedEnd opsional
-        //  * @return string
+         * @param int $unmaskedStart opsional
+         * @param int $unmaskedEnd opsional
+         * @return string
          */
         Collection::macro('maskSensitiveData', function ($data, $unmaskedStart = 2, $unmaskedEnd = 2) {
             $length = strlen($data);
