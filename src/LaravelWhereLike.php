@@ -31,15 +31,15 @@ class LaravelWhereLike
                 foreach (Arr::wrap($attributes) as $attribute) {
                     $query->when(
                         str_contains($attribute, '.'),
-                        function (Builder $query) use ($attribute, $searchTerm, $encryptableAttributes) {
+                        function (Builder $query) use ($attribute, $searchTerm) {
                             $buffer = explode('.', $attribute);
                             $attributeField = array_pop($buffer);
                             $relationPath = implode('.', $buffer);
-                            $query->orWhereHas($relationPath, function (Builder $query) use ($attributeField, $searchTerm, $encryptableAttributes) {
+                            $query->orWhereHas($relationPath, function (Builder $query) use ($attributeField, $searchTerm) {
                                 $relationModel = $query->getModel();
                                 $relationEncryptableAttributes = method_exists($relationModel, 'getEncryptableAttributes') ? $relationModel->getEncryptableAttributes() : [];
 
-                                if (in_array($attributeField, $relationEncryptableAttributes)) {
+                                if (in_array($attributeField, $relationEncryptableAttributes) && method_exists($query, 'whereEncrypted')) {
                                     $query->whereEncrypted($attributeField, 'LIKE', "%{$searchTerm}%");
                                 } else {
                                     $query->where($attributeField, 'LIKE', "%{$searchTerm}%");
@@ -47,7 +47,7 @@ class LaravelWhereLike
                             });
                         },
                         function (Builder $query) use ($attribute, $searchTerm, $encryptableAttributes) {
-                            if (in_array($attribute, $encryptableAttributes)) {
+                            if (in_array($attribute, $encryptableAttributes) && method_exists($query, 'orWhereEncrypted')) {
                                 $query->orWhereEncrypted($attribute, 'LIKE', "%{$searchTerm}%");
                             } else {
                                 $query->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
@@ -62,18 +62,19 @@ class LaravelWhereLike
 
         /**
          * Custom macro maskSensitiveData => Mask sensitive data with asterisk (*) in Laravel Collection
-         * @param string $data
+         * @param string|int|float $data
          * @param int $unmaskedStart opsional
          * @param int $unmaskedEnd opsional
          * @return string
          */
-        Collection::macro('maskSensitiveData', function ($data, $unmaskedStart = 2, $unmaskedEnd = 2) {
-            $length = strlen($data);
-            if ($length <= $unmaskedStart + $unmaskedEnd) {
-                return $data;
+        Collection::macro('maskSensitiveData', function ($data, int $unmaskedStart = 2, int $unmaskedEnd = 2) {
+            $dataString = (string)$data;
+            $length = strlen($dataString);
+            if ($length <= ($unmaskedStart + $unmaskedEnd)) {
+                return $dataString;
             }
-            $start = substr($data, 0, $unmaskedStart);
-            $end = substr($data, -$unmaskedEnd);
+            $start = substr($dataString, 0, $unmaskedStart);
+            $end = substr($dataString, -$unmaskedEnd);
             $masked = str_repeat('*', $length - $unmaskedStart - $unmaskedEnd);
 
             return $start . $masked . $end;
