@@ -24,8 +24,15 @@ class LaravelWhereLike
          * @param string $searchTerm
          * @return Builder
          */
-        Builder::macro('whereLike', function ($attributes, string $searchTerm) {
-            $this->where(function (Builder $query) use ($attributes, $searchTerm) {
+        Builder::macro('whereLike', function ($attributes, string $searchTerm): Builder {
+            /*
+             * Note: In Laravel macro context, $this refers to the Builder instance.
+             * PHPStan doesn't understand this context, so we suppress the warning.
+             * This is a common pattern in Laravel macro definitions.
+             */
+            
+            /** @phpstan-ignore-next-line - $this is valid in macro context */
+            return $this->where(function (Builder $query) use ($attributes, $searchTerm) {
                 $model = $query->getModel();
                 $encryptableAttributes = method_exists($model, 'getEncryptableAttributes') ? $model->getEncryptableAttributes() : [];
                 foreach (Arr::wrap($attributes) as $attribute) {
@@ -56,7 +63,6 @@ class LaravelWhereLike
                     );
                 }
             });
-            return $this;
         });
 
 
