@@ -114,18 +114,6 @@ $customMasked = $sensitiveData->map(function ($item) {
 - PHP 8.1, 8.2, 8.3, or 8.4
 - Laravel 9.x, 10.x, 11.x, or 12.x
 
-Another methods.
-
-```php
-$laravelWhereLike = new Diarsa\LaravelWhereLike\LaravelWhereLike();
-echo $laravelWhereLike->tambah(1, 4);
-
-use Diarsa\LaravelWhereLike\LaravelWhereLike;
-Route::get('calculate', function() {
-    return LaravelWhereLike::tambah(1, 4);
-});
-```
-
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
