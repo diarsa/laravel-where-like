@@ -111,8 +111,20 @@ $customMasked = $sensitiveData->map(function ($item) {
 
 ## Requirements
 
-- PHP 8.1, 8.2, 8.3, or 8.4
-- Laravel 9.x, 10.x, 11.x, or 12.x
+| Laravel | Minimum PHP |
+| --- | --- |
+| 9.x, 10.x | 8.1 |
+| 11.x, 12.x | 8.2 |
+| 13.x | 8.3 |
+
+PHP 8.5 is included in the test matrix for Laravel 12 and 13.
+
+## Testing
+
+```bash
+composer update
+vendor/bin/pest
+```
 
 ## Changelog
 
